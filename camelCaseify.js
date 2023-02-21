@@ -14,8 +14,11 @@
 
         const replacement = {};
         for (const k in source) {
-            const newkey = k[0].toLowerCase() + k.substring(1);
-            replacement[newkey] = camelCaseify(source[k]);
+            let newKey = k[0].toLowerCase() + k.substring(1);
+            if (newKey.length <= 4) {
+                newKey = newKey.toLowerCase(); // if it's short 4 or less then it's probably an abbreviation or acronym
+            }
+            replacement[newKey] = camelCaseify(source[k]);
         }
         return replacement;
     };
